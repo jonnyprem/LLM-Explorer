@@ -44,38 +44,53 @@ insurance-advisor/
 │   │   └── store.py              # Memory interface + in-memory fallback
 │   └── prompts/
 │       └── insurance_product_match.py   # Recommendation prompt template
+├── requirements.txt              # Python dependencies
 └── main.py                       # Demo entrypoint (builds and invokes graph)
 ```
 
 ---
 
-## How to start
+## Run everything inside a virtual environment
 
-### 1) Prerequisites
+> Recommended: run **all project commands** from a virtual environment.
 
-- Python **3.10+** recommended
-- `pip`
-
-### 2) Create and activate a virtual environment (recommended)
+### 1) Create virtual environment
 
 ```bash
 python -m venv .venv
+```
+
+### 2) Activate virtual environment
+
+Linux/macOS:
+
+```bash
 source .venv/bin/activate
 ```
 
-### 3) Install dependencies
+Windows (PowerShell):
 
-```bash
-pip install --upgrade pip
-pip install langgraph typing_extensions
+```powershell
+.venv\Scripts\Activate.ps1
 ```
 
-> Note: The current demo uses in-memory components, so no external vector DB or Redis is required to run locally.
+### 3) Install dependencies (inside the venv)
 
-### 4) Run the demo
+```bash
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+### 4) Run the demo (inside the venv)
 
 ```bash
 python main.py
+```
+
+### 5) Deactivate when done
+
+```bash
+deactivate
 ```
 
 You should see either:
@@ -120,10 +135,13 @@ This is a starter scaffold and intentionally simple:
 
 ### `ModuleNotFoundError: No module named 'langgraph'`
 
-Install dependencies:
+Usually this means dependencies were installed outside the virtual environment.
+
+Fix:
 
 ```bash
-pip install langgraph typing_extensions
+source .venv/bin/activate
+python -m pip install -r requirements.txt
 ```
 
 ### I only get clarification questions
